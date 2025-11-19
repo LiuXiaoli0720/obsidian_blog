@@ -1,0 +1,19 @@
+## 模型结构  
+  
+- **脉冲MoE架构**：将脉冲神经网络与混合专家模型（MoE）相结合，实现高能效的动态专家选择  
+- **共享-特定特征学习机制**：同时学习模态不变的共享特征和模态特定特征  
+- **跨模态注意力机制**：增强不同模态间的信息交换和特征融合  
+- **鲁棒缺失模态处理**：通过共享特征补偿机制应对模态缺失场景  
+  
+## 数据集  
+  
+**UrbanSound8K-AV** The UrbanSound8K-AV dataset is a combination of the UrbanSound8K audio dataset and its corresponding image dataset. The UrbanSound8KAV dataset contains the same number of samples as the UrbanSound8K audio dataset, totaling 8732 audiovisual samples. Each sample consists of a high-resolution color image and a 4-second audio signal.  
+  
+**CMU-MOSI and MOSEI Datasets** We first apply our method to the CMU-MOSI and MOSEI datasets, which utilize visual, acoustic, and textual data for sentiment analysis and emotion recognition tasks. Our methodology employs pre-trained T5 for text encoding, librosa for audio feature extraction, and EfficientNet for video feature encoding. Table 3 details the performance of various router design mechanisms within our MoE architecture, utilizing the Laplace gating function, compared against representative baselines. The baselines include (1) the early fusion method, Tensor Fusion Network (TFN); (2) the Multimodal Transformer (MulT), which fuses modalities by modeling their interactions; (3) the Multimodal Adaptation Gate (MAG), which focuses on the consistency and differences across modalities; and (4) multimodal fusion using standard MoE with the Softmax gating function. Results indicate that employing an MoE backbone—regardless of the gating function chosen or whether utilizing per-modality routers or a joint experts & router configuration—significantly enhances performance on the multimodal task. This improvement is attributed to the MoE’s ability to effectively allocate specific components to handle distinct input modalities, thus better addressing both inter- and intra-modal relationships.  
+  
+**ADNI Dataset** Alzheimer’s Disease Neuroimaging Initiative (ADNI) is a landmark multimodal AD dataset that tracks disease progression and pathological changes, comprising of comprehensive imaging, genetic, clinical, and biospecimen data. The imaging data in ADNI includes magnetic resonance imaging (MRI) and positron emission tomogrpahy (PET). The genetic data includes a variety of genetic information, including genotyping data such as APOE genotyping and single nucleotide polymorphisms. The clinical data includes demographics, physical examinations, and cognitive assessments. Biospecimens such as blood, urine, and cerebrospinal fluid are also collected. ADNI has established standardized multi-center protocols and provides open access to qualified researchers, making it a gold-standard resource in the field. Before integrating all modalities, to address the initial missing data within each modality, we applied simple mean imputation for each column.  
+  
+~~**MIMIC-IV Dataset** We use the Medical Information Mart for Intensive Care IV (MIMIC-IV) database, which contains de-identified health data for patients who were admitted to either the emergency department or stayed in critical care units of the Beth Israel Deaconess Medical Center in Boston, Massachusetts24. MIMIC-IV excludes patients under 18 years of age. We take a subset of the MIMIC-IV data, where each patient has at least more than 1 visit in the dataset as this subset corresponds to patients who likely have more serious health conditions. For each datapoint, we extract ICD-9 codes, clinical text, and labs and vital values. Using this data, we perform binary classification on one-year mortality, which foresees whether or not this patient will pass away in a year. We drop visits that occur at the same time as the patient’s death. In order to align the experimental setup with the ADNI data, which does not contain temporal data, we take the last visit for each patient.~~  
+  
+## 设计方案  
+  
